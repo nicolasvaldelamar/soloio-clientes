@@ -44,7 +44,7 @@ app.post('/update', (req, res) => {
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
-app.get('/clientes-soloio', (req, res)=>{
+app.get('/clientessoloio', (req, res)=>{
     res.sendFile(path.join(__dirname, 'admin.html'));
 })
 app.get('/preview', (req, res) => {
