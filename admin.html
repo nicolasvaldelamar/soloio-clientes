@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/handsontable/dist/handsontable.full.min.css">
+    <script src="https://unpkg.com/handsontable/dist/handsontable.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        #hot {
+            width: 80%;
+            margin: auto;
+            margin-top: 50px;
+            background-color: #fff;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        #save {
+            display: block;
+            width: 200px;
+            height: 40px;
+            margin: 20px auto;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        #save:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="save">Descargar</button>
+    <div id="hot"></div>
+    <script>
+        let data = []; 
+
+
+        const container = document.getElementById('hot');
+        const hot = new Handsontable(container, {
+            data: data,
+            rowHeaders: true,
+            colHeaders: true,
+            filters: true,
+            dropdownMenu: true,
+            licenseKey: 'non-commercial-and-evaluation',
+            readOnly: true
+        });
+
+  
+        fetch('/preview2')
+            .then(response => response.json())
+            .then(json => {
+                data = json;
+                hot.loadData(data);
+            });
+
+  
+        document.getElementById('save').addEventListener('click', () => {
+            fetch('/download')
+                .then(res => res.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'emails.xlsx';
+                    a.click();
+                });
+
+        });
+    </script>
+</body>
+
+</html>
