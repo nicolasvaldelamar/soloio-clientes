@@ -289,7 +289,13 @@ form.sign-up-form{
         transform: translate(-50%, -100%);
         transition: 1 .8s ease-in-out;
     }
+    h2.signin.title{
+        text-align: center;
 
+    }
+    .logo {
+        width: 200px;
+    }
     .panels-container{
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 2fr 1fr;
@@ -337,7 +343,6 @@ form.sign-up-form{
     }
 
     .panels-container{
-        z-index: 10;
         grid-template-columns: 1fr;
     }
 
