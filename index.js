@@ -1,12 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const XLSX = require('xlsx');
-const path = require('path')
+const path = require('path');
+const cors = require('cors');
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
-
+app.use(cors())
 app.post('/update', (req, res) => {
     const newData = req.body;
     const workbook = XLSX.readFile('emails.xlsx');
